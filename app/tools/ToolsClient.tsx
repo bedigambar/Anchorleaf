@@ -60,7 +60,7 @@ const PHYSICAL_ANCHORS = [
 export default function ToolsClient() {
   return (
     <main style={{ background: "var(--cream)", paddingTop: "120px" }}>
-        <section className="container" style={{ marginBottom: "40px", textAlign: "center" }}>
+        <section className="container tools-hero" style={{ marginBottom: "40px", textAlign: "center" }}>
           <div
             style={{
               display: "flex",
@@ -122,6 +122,7 @@ export default function ToolsClient() {
             initial={{ opacity: 0, y: 16 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, delay: 0.3 }}
+            className="bookmark-hint"
             style={{
               display: "inline-flex",
               alignItems: "center",
@@ -512,6 +513,17 @@ export default function ToolsClient() {
             }
             .anchors-grid {
               grid-template-columns: 1fr 1fr !important;
+            }
+          }
+          @media (max-width: 768px) {
+            .bookmark-hint {
+              display: none !important;
+            }
+            .tools-hero {
+              margin-bottom: 24px !important;
+            }
+            .tools-hero p.body-lg {
+              margin-bottom: 0 !important;
             }
           }
           @media (max-width: 540px) {
