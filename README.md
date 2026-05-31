@@ -106,3 +106,11 @@ To maximize SEO performance and initial load speeds while retaining rich Framer 
 * **Zero Tracking**: No Google Analytics, no tracking cookies, no external trackers.
 * **Client-Only Storage**: All journal entries and bookmarks are stored strictly within the user's browser using `localStorage`. Your data never leaves your device.
 * **No Paywalls**: Anchorleaf is 100% free, open-source, and dedicated to emotional health accessibility.
+
+---
+
+## 📄 License & Attribution
+
+Anchorleaf is released under the [MIT License](https://github.com/bedigambar/Anchorleaf/blob/main/LICENSE) — © 2026 bedigambar.
+
+You're welcome to use, modify and build on this code, but you must keep the copyright notice and license intact (i.e. give credit). If you ship something based on Anchorleaf, a shout-out and a link back to [this repo](https://github.com/bedigambar/Anchorleaf) is hugely appreciated. 🙏
