@@ -6,14 +6,17 @@ import {
   BookmarkCheck,
   CalendarCheck,
   ChevronDown,
+  Download,
   Trash2,
   ArrowRight,
   Lock,
+  Phone,
   Sparkles,
 } from "lucide-react";
 import {
   type JournalEntry,
   deleteJournalEntry,
+  exportJournalEntries,
   getBookmarks,
   getJournalEntries,
   saveJournalEntry,
@@ -392,6 +395,123 @@ export default function JournalClient() {
               ))}
             </div>
 
+            {/* Crisis banner at intensity 5 */}
+            {intensity === 5 && (
+              <div
+                style={{
+                  marginBottom: "20px",
+                  padding: "16px 20px",
+                  background: "rgba(200, 122, 90, 0.08)",
+                  border: "1px solid rgba(200, 122, 90, 0.28)",
+                  borderRadius: "var(--radius-md)",
+                  fontFamily: "'DM Sans', sans-serif",
+                }}
+              >
+                <p
+                  style={{
+                    fontSize: "0.88rem",
+                    fontWeight: 600,
+                    color: "#8a3c1e",
+                    marginBottom: "8px",
+                    display: "flex",
+                    alignItems: "center",
+                    gap: "6px",
+                  }}
+                >
+                  <Phone size={14} strokeWidth={1.75} />
+                  If you&apos;re in crisis right now, you don&apos;t have to be alone.
+                </p>
+                <div style={{ display: "flex", flexWrap: "wrap", gap: "8px", marginBottom: "8px" }}>
+                  <a
+                    href="tel:988"
+                    style={{
+                      fontSize: "0.82rem",
+                      color: "#8a3c1e",
+                      fontWeight: 600,
+                      textDecoration: "none",
+                      background: "rgba(200, 122, 90, 0.12)",
+                      padding: "4px 10px",
+                      borderRadius: "9999px",
+                      border: "1px solid rgba(200, 122, 90, 0.25)",
+                    }}
+                  >
+                    US/Global: 988
+                  </a>
+                  <a
+                    href="sms:741741?body=HOME"
+                    style={{
+                      fontSize: "0.82rem",
+                      color: "#8a3c1e",
+                      fontWeight: 600,
+                      textDecoration: "none",
+                      background: "rgba(200, 122, 90, 0.12)",
+                      padding: "4px 10px",
+                      borderRadius: "9999px",
+                      border: "1px solid rgba(200, 122, 90, 0.25)",
+                    }}
+                  >
+                    Text HOME to 741741
+                  </a>
+                  <a
+                    href="tel:14416"
+                    style={{
+                      fontSize: "0.82rem",
+                      color: "#8a3c1e",
+                      fontWeight: 600,
+                      textDecoration: "none",
+                      background: "rgba(200, 122, 90, 0.12)",
+                      padding: "4px 10px",
+                      borderRadius: "9999px",
+                      border: "1px solid rgba(200, 122, 90, 0.25)",
+                    }}
+                  >
+                    India: 14416
+                  </a>
+                  <a
+                    href="tel:9152987821"
+                    style={{
+                      fontSize: "0.82rem",
+                      color: "#8a3c1e",
+                      fontWeight: 600,
+                      textDecoration: "none",
+                      background: "rgba(200, 122, 90, 0.12)",
+                      padding: "4px 10px",
+                      borderRadius: "9999px",
+                      border: "1px solid rgba(200, 122, 90, 0.25)",
+                    }}
+                  >
+                    India iCall: 9152987821
+                  </a>
+                </div>
+                <p style={{ fontSize: "0.78rem", color: "var(--text-muted)", margin: 0 }}>
+                  More resources: IASP crisis centres at{" "}
+                  <a
+                    href="https://iasp.info/resources/Crisis_Centres/"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    style={{ color: "#8a3c1e" }}
+                  >
+                    iasp.info
+                  </a>
+                </p>
+                <p style={{ fontSize: "0.78rem", marginTop: "10px", margin: 0 }}>
+                  <a
+                    href="/tools?crisis=true"
+                    style={{
+                      color: "#8a3c1e",
+                      fontWeight: 600,
+                      textDecoration: "none",
+                      display: "inline-flex",
+                      alignItems: "center",
+                      gap: "4px",
+                    }}
+                  >
+                    Go to the grounding toolkit →
+                  </a>
+                </p>
+              </div>
+            )}
+
             <p
               style={{
                 fontFamily: "'DM Sans', sans-serif",
@@ -632,11 +752,13 @@ export default function JournalClient() {
 
         {hydrated && entries.length > 0 && (
           <section className="container" style={{ maxWidth: "880px", marginLeft: "auto", marginRight: "auto" }}>
-            <button
-              onClick={() => setShowHistory((s) => !s)}
-              style={{
-                background: "transparent",
-                border: "1px solid var(--border)",
+            <div style={{ display: "flex", gap: "10px", alignItems: "center", marginBottom: "0" }}>
+              <button
+                onClick={() => setShowHistory((s) => !s)}
+                style={{
+                  flex: 1,
+                  background: "transparent",
+                  border: "1px solid var(--border)",
                 borderRadius: "var(--radius-md)",
                 padding: "12px 18px",
                 width: "100%",
@@ -663,6 +785,38 @@ export default function JournalClient() {
                 }}
               />
             </button>
+            <button
+              type="button"
+              onClick={() => exportJournalEntries()}
+              title="Export your journal data as JSON"
+              style={{
+                display: "inline-flex",
+                alignItems: "center",
+                gap: "6px",
+                padding: "12px 16px",
+                background: "transparent",
+                border: "1px solid var(--border)",
+                borderRadius: "var(--radius-md)",
+                fontFamily: "'DM Sans', sans-serif",
+                fontSize: "0.85rem",
+                fontWeight: 500,
+                color: "var(--text-secondary)",
+                cursor: "pointer",
+                transition: "all 0.2s ease",
+                whiteSpace: "nowrap",
+              }}
+              onMouseEnter={(e) => {
+                (e.currentTarget as HTMLButtonElement).style.background = "var(--warm-white)";
+                (e.currentTarget as HTMLButtonElement).style.color = "var(--text-primary)";
+              }}
+              onMouseLeave={(e) => {
+                (e.currentTarget as HTMLButtonElement).style.background = "transparent";
+                (e.currentTarget as HTMLButtonElement).style.color = "var(--text-secondary)";
+              }}
+            >
+              <Download size={14} strokeWidth={1.5} /> Export
+            </button>
+            </div>
 
             <AnimatePresence>
               {showHistory && (

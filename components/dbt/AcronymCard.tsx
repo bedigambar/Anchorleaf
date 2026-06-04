@@ -2,7 +2,7 @@
 import { useEffect, useState } from "react";
 import { motion } from "framer-motion";
 import { Bookmark, BookmarkCheck } from "lucide-react";
-import { isBookmarked, toggleBookmark } from "@/lib/storage";
+import { isBookmarked, toggleBookmark, markSkillRead, isSkillRead } from "@/lib/storage";
 
 export interface AcronymItem {
   letter: string;
@@ -63,9 +63,16 @@ export default function AcronymCard({
 }: AcronymCardProps) {
   const [bookmarked, setBookmarked] = useState(false);
   const [hydrated, setHydrated] = useState(false);
+  const [explored, setExplored] = useState(false);
 
   useEffect(() => {
-    if (skillId) setBookmarked(isBookmarked(skillId));
+    if (skillId) {
+      setBookmarked(isBookmarked(skillId));
+      setExplored(isSkillRead(skillId));
+      markSkillRead(skillId);
+      // Update explored state after marking
+      setExplored(true);
+    }
     setHydrated(true);
   }, [skillId]);
 
@@ -83,47 +90,65 @@ export default function AcronymCard({
       style={{ position: "relative" }}
     >
       {skillId && hydrated && (
-        <button
-          type="button"
-          onClick={handleToggle}
-          aria-label={bookmarked ? "Remove bookmark" : "Bookmark this skill"}
-          title={bookmarked ? "Remove bookmark" : "Bookmark this skill"}
-          style={{
-            position: "absolute",
-            top: "20px",
-            right: "20px",
-            width: "36px",
-            height: "36px",
-            borderRadius: "50%",
-            border: bookmarked
-              ? "1px solid var(--pillar-accent)"
-              : "1px solid var(--border)",
-            background: bookmarked ? "var(--pillar-tint)" : "var(--warm-white)",
-            color: bookmarked ? "var(--pillar-accent)" : "var(--text-muted)",
-            cursor: "pointer",
-            display: "flex",
-            alignItems: "center",
-            justifyContent: "center",
-            transition: "all 0.2s ease",
-            zIndex: 2,
-          }}
-          onMouseEnter={(e) => {
-            e.currentTarget.style.borderColor = "var(--pillar-accent)";
-            e.currentTarget.style.color = "var(--pillar-accent)";
-          }}
-          onMouseLeave={(e) => {
-            if (!bookmarked) {
-              e.currentTarget.style.borderColor = "var(--border)";
-              e.currentTarget.style.color = "var(--text-muted)";
-            }
-          }}
-        >
-          {bookmarked ? (
-            <BookmarkCheck size={15} strokeWidth={1.75} />
-          ) : (
-            <Bookmark size={15} strokeWidth={1.75} />
+        <div style={{ position: "absolute", top: "16px", right: "16px", display: "flex", alignItems: "center", gap: "6px" }}>
+          {explored && (
+            <span
+              style={{
+                fontSize: "0.65rem",
+                fontFamily: "'DM Sans', sans-serif",
+                fontWeight: 600,
+                color: "var(--sage-dark)",
+                background: "rgba(92, 138, 94, 0.12)",
+                border: "1px solid rgba(92, 138, 94, 0.2)",
+                borderRadius: "9999px",
+                padding: "2px 8px",
+                letterSpacing: "0.03em",
+                userSelect: "none",
+              }}
+            >
+              ✓ Explored
+            </span>
           )}
-        </button>
+          <button
+            type="button"
+            onClick={handleToggle}
+            aria-label={bookmarked ? "Remove bookmark" : "Bookmark this skill"}
+            title={bookmarked ? "Remove bookmark" : "Bookmark this skill"}
+            style={{
+              width: "36px",
+              height: "36px",
+              borderRadius: "50%",
+              border: bookmarked
+                ? "1px solid var(--pillar-accent)"
+                : "1px solid var(--border)",
+              background: bookmarked ? "var(--pillar-tint)" : "var(--warm-white)",
+              color: bookmarked ? "var(--pillar-accent)" : "var(--text-muted)",
+              cursor: "pointer",
+              display: "flex",
+              alignItems: "center",
+              justifyContent: "center",
+              transition: "all 0.2s ease",
+              zIndex: 2,
+              flexShrink: 0,
+            }}
+            onMouseEnter={(e) => {
+              e.currentTarget.style.borderColor = "var(--pillar-accent)";
+              e.currentTarget.style.color = "var(--pillar-accent)";
+            }}
+            onMouseLeave={(e) => {
+              if (!bookmarked) {
+                e.currentTarget.style.borderColor = "var(--border)";
+                e.currentTarget.style.color = "var(--text-muted)";
+              }
+            }}
+          >
+            {bookmarked ? (
+              <BookmarkCheck size={15} strokeWidth={1.75} />
+            ) : (
+              <Bookmark size={15} strokeWidth={1.75} />
+            )}
+          </button>
+        </div>
       )}
 
       <div style={{ marginBottom: "0", paddingRight: skillId ? "44px" : "0" }}>

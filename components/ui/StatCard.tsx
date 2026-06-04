@@ -1,4 +1,4 @@
-﻿"use client";
+"use client";
 import { useEffect, useRef, useState } from "react";
 import { motion } from "framer-motion";
 
@@ -8,9 +8,10 @@ const reveal = {
 };
 
 function useCountUp(target: number, duration = 2000, active: boolean) {
-  const [count, setCount] = useState(0);
+  const [count, setCount] = useState(target); // start at target as fallback (non-zero)
   useEffect(() => {
     if (!active) return;
+    setCount(0); // reset to 0 before animating
     const startTime = performance.now();
     const raf = (now: number) => {
       const elapsed = now - startTime;

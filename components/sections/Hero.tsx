@@ -483,7 +483,7 @@ export default function Hero() {
                     </svg>
                   </div>
 
-                  <div style={{ background: "rgba(255, 255, 255, 0.05)", borderRadius: "20px", padding: "14px", border: "1px solid rgba(255, 255, 255, 0.08)", zIndex: 6, marginBottom: "16px" }}>
+                  <div style={{ background: "rgba(255, 255, 255, 0.05)", borderRadius: "20px", padding: "14px 14px 44px", border: "1px solid rgba(255, 255, 255, 0.08)", zIndex: 6, marginBottom: "16px", position: "relative" }}>
                     <div style={{ display: "flex", justifyContent: "space-between", fontSize: "0.75rem", color: "rgba(255,255,255,0.6)", marginBottom: "8px" }}>
                       <span style={{ display: "inline-flex", alignItems: "center", gap: "4px", color: sliderValue < 45 ? "#b0c8e8" : "inherit", transition: "color 0.3s" }}>
                         <Brain size={12} /> Rational ({100 - sliderValue}%)
@@ -513,7 +513,7 @@ export default function Hero() {
                       className="custom-range-slider"
                     />
 
-                    <div style={{ textAlign: "center", height: "20px" }}>
+                    <div style={{ position: "absolute", bottom: "12px", left: "14px", right: "14px", textAlign: "center", display: "flex", alignItems: "center", justifyContent: "center" }}>
                       <AnimatePresence mode="wait">
                         {isWiseMind ? (
                           <motion.span
@@ -521,9 +521,10 @@ export default function Hero() {
                             initial={{ opacity: 0, y: 5 }}
                             animate={{ opacity: 1, y: 0 }}
                             exit={{ opacity: 0, y: -5 }}
-                            style={{ fontSize: "0.72rem", color: "var(--sage-light)", fontWeight: 700, letterSpacing: "0.05em", textTransform: "uppercase", display: "inline-flex", alignItems: "center", gap: "4px" }}
+                            style={{ display: "flex", flexDirection: "column", alignItems: "center", gap: "2px" }}
                           >
-                            ? Wise Mind Active
+                            <span style={{ fontSize: "0.72rem", color: "var(--sage-light)", fontWeight: 700, letterSpacing: "0.05em", textTransform: "uppercase" }}>✨ Wise Mind</span>
+                            <span style={{ fontSize: "0.62rem", color: "var(--sage-light)", fontWeight: 400, opacity: 0.75, letterSpacing: "0.01em" }}>An integrated state, not 50/50</span>
                           </motion.span>
                         ) : (
                           <motion.span
@@ -533,7 +534,7 @@ export default function Hero() {
                             exit={{ opacity: 0 }}
                             style={{ fontSize: "0.72rem", color: "#fefaf5" }}
                           >
-                            Slide to 50% to find balance
+                            Move toward the integrated space
                           </motion.span>
                         )}
                       </AnimatePresence>

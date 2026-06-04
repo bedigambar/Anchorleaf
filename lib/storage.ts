@@ -2,6 +2,7 @@ const KEYS = {
   bookmarks: "anchorleaf.bookmarks.skills.v1",
   journal: "anchorleaf.journal.entries.v1",
   heroSeen: "anchorleaf.hero.seen.v1",
+  skillsRead: "anchorleaf.skills.read.v1",
 } as const;
 
 function isClient(): boolean {
@@ -79,6 +80,19 @@ export function deleteJournalEntry(id: string): JournalEntry[] {
   return next;
 }
 
+export function exportJournalEntries(): void {
+  if (!isClient()) return;
+  const entries = getJournalEntries();
+  const json = JSON.stringify(entries, null, 2);
+  const blob = new Blob([json], { type: "application/json" });
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement("a");
+  a.href = url;
+  a.download = `anchorleaf-journal-${new Date().toISOString().split("T")[0]}.json`;
+  a.click();
+  URL.revokeObjectURL(url);
+}
+
 export function todayKey(): string {
   const d = new Date();
   const y = d.getFullYear();
@@ -101,4 +115,19 @@ export function markHeroSeen(): void {
   try {
     window.sessionStorage.setItem(KEYS.heroSeen, "true");
   } catch {}
+}
+
+// Skill progress tracking — counts only top-level named skills read
+export function getReadSkills(): string[] {
+  return read<string[]>(KEYS.skillsRead, []);
+}
+
+export function markSkillRead(skillId: string): void {
+  const current = getReadSkills();
+  if (current.includes(skillId)) return;
+  write(KEYS.skillsRead, [...current, skillId]);
+}
+
+export function isSkillRead(skillId: string): boolean {
+  return getReadSkills().includes(skillId);
 }

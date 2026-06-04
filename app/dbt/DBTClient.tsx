@@ -1,5 +1,5 @@
 "use client";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import Link from "next/link";
 import DBTHubHero from "@/components/dbt/DBTHubHero";
 import DBTScrollIndicator from "@/components/dbt/DBTScrollIndicator";
@@ -9,7 +9,8 @@ import SkillFilterBar, { filterSkillMap } from "@/components/dbt/SkillFilterBar"
 import DBTBottomCTA from "@/components/dbt/DBTBottomCTA";
 import WaveAnimation from "@/components/dbt/WaveAnimation";
 import { motion } from "framer-motion";
-import { Wind, Waves, Sun, Users, ArrowRight } from "lucide-react";
+import { Wind, Waves, Sun, Users, ArrowRight, BookOpen } from "lucide-react";
+import { getReadSkills } from "@/lib/storage";
 
 const reveal = { hidden: { opacity: 0, y: 24 }, visible: { opacity: 1, y: 0, transition: { duration: 0.6, ease: [0.25, 0.1, 0.25, 1] as const } } };
 const stagger = { hidden: {}, visible: { transition: { staggerChildren: 0.1, delayChildren: 0.05 } } };
@@ -90,8 +91,22 @@ function getCardClass(skillId: string, activeFilter: string | null) {
   return relevant.includes(skillId) ? "skill-card highlighted" : "skill-card dimmed";
 }
 
+// Total named skills across all pillars (mindfulness + distress + emotion + interpersonal)
+// Counts: wise-mind, what-skills, how-skills, dear-man, fast, give, think, raven, stop, tipp, accepts, improve, abc, please, vitals
+// + opposite-action, radical-acceptance, self-soothe, vitals = defined inline in DBTClient
+const TOTAL_SKILL_COUNT = 19;
+
 export default function DBTClient() {
   const [activeFilter, setActiveFilter] = useState<string | null>(null);
+  const [exploredCount, setExploredCount] = useState(0);
+
+  useEffect(() => {
+    setExploredCount(getReadSkills().length);
+    // Re-check when window regains focus (user may have opened another tab)
+    const onFocus = () => setExploredCount(getReadSkills().length);
+    window.addEventListener("focus", onFocus);
+    return () => window.removeEventListener("focus", onFocus);
+  }, []);
 
   return (
     <>
@@ -99,6 +114,32 @@ export default function DBTClient() {
       <main>
         <DBTHubHero />
         <SkillFilterBar activeFilter={activeFilter} onFilterChange={setActiveFilter} />
+
+        {exploredCount > 0 && (
+          <div style={{ display: "flex", justifyContent: "center", padding: "0 24px 8px" }}>
+            <div
+              style={{
+                display: "inline-flex",
+                alignItems: "center",
+                gap: "8px",
+                padding: "8px 16px",
+                background: "rgba(92, 138, 94, 0.08)",
+                border: "1px solid rgba(92, 138, 94, 0.18)",
+                borderRadius: "9999px",
+                fontFamily: "'DM Sans', sans-serif",
+                fontSize: "0.82rem",
+                color: "var(--sage-dark)",
+              }}
+            >
+              <BookOpen size={13} strokeWidth={1.75} />
+              You&apos;ve explored{" "}
+              <strong>
+                {Math.min(exploredCount, TOTAL_SKILL_COUNT)} of {TOTAL_SKILL_COUNT}
+              </strong>{" "}
+              skills
+            </div>
+          </div>
+        )}
 
         <section id="mindfulness" className="pillar-mindfulness section" style={{ background: "var(--pillar-bg)" }}>
           <div className="container">

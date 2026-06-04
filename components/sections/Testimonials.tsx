@@ -8,31 +8,31 @@ const reveal  = { hidden: { opacity: 0, y: 24 }, visible: { opacity: 1, y: 0, tr
 const stories: { quote: string; meta: string; tags: string[]; theme: "relationships" | "mindfulness" | "growth" | "healing" }[] = [
   {
     quote: "I didn't know I had BPD until I found content that actually described what I live with. For the first time I felt seen.",
-    meta: "Common experience · Relationships & Splitting",
+    meta: "Common theme · Relationships & Splitting",
     tags: ["#Splitting", "#Relationships"],
     theme: "relationships",
   },
   {
     quote: "DEAR MAN changed how I communicate with everyone I love. I still mess up, but I know how to repair now.",
-    meta: "Shared reflection · Interpersonal Effectiveness",
+    meta: "Common theme · Interpersonal Effectiveness",
     tags: ["#Interpersonal", "#Progress"],
     theme: "mindfulness",
   },
   {
     quote: "The S.T.O.P. skill is the only thing that's ever helped me pause before I say something I can't take back.",
-    meta: "Common experience · Distress Tolerance skill",
+    meta: "Common theme · Distress Tolerance",
     tags: ["#DistressTolerance", "#Impulse"],
     theme: "growth",
   },
   {
     quote: "Radical Acceptance. I hated the idea. Then I had to survive my divorce. Now I understand it deeply.",
-    meta: "Shared reflection · Radical Acceptance",
+    meta: "Common theme · Radical Acceptance",
     tags: ["#RadicalAcceptance", "#Healing"],
     theme: "healing",
   },
   {
     quote: "I used to think DBT was just worksheets. Turns out it's a whole new way of relating to yourself.",
-    meta: "Common experience · Mindfulness & Growth",
+    meta: "Common theme · Mindfulness & Growth",
     tags: ["#Mindfulness", "#Growth"],
     theme: "growth",
   },
@@ -52,13 +52,13 @@ export default function Testimonials() {
           style={{ marginBottom: "48px" }}
         >
           <motion.div variants={reveal}>
-            <span className="section-label">Shared reflections</span>
+            <span className="section-label">What people often share</span>
           </motion.div>
           <motion.h2 variants={reveal} className="h2" style={{ color: "var(--text-primary)", marginBottom: 0 }}>
             You&apos;re in good company.
           </motion.h2>
           <motion.p variants={reveal} className="body-md" style={{ color: "var(--text-secondary)", maxWidth: "540px", marginTop: "12px", lineHeight: 1.6 }}>
-            Inspired by experiences commonly shared by people learning and practicing DBT.
+            Common themes from the DBT community — composite examples, not individual testimonials.
           </motion.p>
         </motion.div>
       </div>

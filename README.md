@@ -18,8 +18,9 @@ Live Repository: [https://github.com/bedigambar/Anchorleaf](https://github.com/b
   - **Box Breathing Companion**: Smooth, visual, and rhythmic breathing guide to regulate the nervous system.
   - **Grounding 5-4-3-2-1**: Interactive sensory grounding tool to combat dissociation and anxiety.
   - **Self-Soothe Card**: A modular guide to recruit the 5 senses for emotional regulation.
+  - **Smart Region-Aware Crisis Helpline**: Automatically detects the user's broad geographic region using local timezone inference to show relevant emergency helplines alongside global resources (988, IASP) without active GPS/location tracking.
 - **📖 Integrated Skills Handbook**: An inline, responsive PDF reader featuring the official DBT Skills Training Handouts and Worksheets for easy study and review.
-- **📓 Privacy-First Daily Journal**: A daily mood, behavior, and urge tracker stored entirely locally on your device (`localStorage`) with no server-side databases or trackers.
+- **📓 Privacy-First Daily Journal**: A daily mood, behavior, and urge tracker stored entirely locally on your device (`localStorage`) with no server-side databases or trackers. Includes structured data backup via a one-click clean JSON export schema.
 - **🔍 Quick Navigation Command Palette**: Press `Ctrl + K` or `⌘ + K` to search and jump to any skill, resource, or page instantly.
 
 ---
@@ -105,6 +106,7 @@ To maximize SEO performance and initial load speeds while retaining rich Framer 
 
 * **Zero Tracking**: No Google Analytics, no tracking cookies, no external trackers.
 * **Client-Only Storage**: All journal entries and bookmarks are stored strictly within the user's browser using `localStorage`. Your data never leaves your device.
+* **Local-Only Region Inferences**: Crisis helpline recommendations utilize broad timezone lookup (`Intl.DateTimeFormat().resolvedOptions().timeZone`) processed purely on the client side, requiring zero location tracking, GPS permissions, or server-side calls.
 * **No Paywalls**: Anchorleaf is 100% free, open-source, and dedicated to emotional health accessibility.
 
 ---
