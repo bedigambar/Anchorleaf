@@ -2,7 +2,6 @@
 
 An ad-free, privacy-first, scientifically-grounded Dialectical Behavior Therapy (DBT) companion designed specifically to aid individuals managing Borderline Personality Disorder (BPD), intense emotions, and distress. Built on the clinical principles established by Dr. Marsha Linehan.
 
-Live Repository: [https://github.com/bedigambar/Anchorleaf](https://github.com/bedigambar/Anchorleaf)
 
 ---
 
@@ -111,14 +110,6 @@ To maximize SEO performance and initial load speeds while retaining rich Framer 
 
 ---
 
-## 📄 License & Attribution
-
-Anchorleaf is released under the [MIT License](https://github.com/bedigambar/Anchorleaf/blob/main/LICENSE) — © 2026 bedigambar.
-
-You're welcome to use, modify and build on this code, but you must keep the copyright notice and license intact (i.e. give credit). If you ship something based on Anchorleaf, a shout-out and a link back to [this repo](https://github.com/bedigambar/Anchorleaf) is hugely appreciated. 🙏
-
----
-
 ## ✍️ Write for Anchorleaf
 
 > **Want to contribute an article or perspective?**
@@ -128,3 +119,13 @@ If you have a story, skill breakdown, or compassionate perspective on BPD and DB
 Reach out on X (Twitter): [@digambarcodes](https://x.com/digambarcodes)
 
 We'll work with you to get it published. No gatekeeping, just real voices.
+
+---
+
+## 📄 License & Attribution
+
+Anchorleaf is released under the [MIT License](https://github.com/bedigambar/Anchorleaf/blob/main/LICENSE) — © 2026 bedigambar.
+
+You're welcome to use, modify and build on this code, but you must keep the copyright notice and license intact (i.e. give credit). If you ship something based on Anchorleaf, a shout-out and a link back to [this repo](https://github.com/bedigambar/Anchorleaf) is hugely appreciated. 🙏
+
+---
