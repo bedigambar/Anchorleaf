@@ -1,7 +1,8 @@
-﻿"use client";
+"use client";
 import { useEffect, useRef, useState } from "react";
 import { motion } from "framer-motion";
 import StatCard from "@/components/ui/StatCard";
+import RoughNotation from "@/components/ui/RoughNotation";
 
 const stagger = { hidden: {}, visible: { transition: { staggerChildren: 0.12, delayChildren: 0.1 } } };
 
@@ -38,6 +39,7 @@ const stats = [
 export default function YouAreNotAlone() {
   const ref = useRef<HTMLDivElement>(null);
   const [active, setActive] = useState(false);
+  const [animationComplete, setAnimationComplete] = useState(false);
 
   useEffect(() => {
     const obs = new IntersectionObserver(([entry]) => { if (entry.isIntersecting) { setActive(true); obs.disconnect(); } }, { threshold: 0.3 });
@@ -53,6 +55,7 @@ export default function YouAreNotAlone() {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, amount: 0.2 }}
           transition={{ duration: 0.7 }}
+          onAnimationComplete={() => setAnimationComplete(true)}
           style={{
             position: "relative",
             textAlign: "center",
@@ -70,10 +73,19 @@ export default function YouAreNotAlone() {
             fontWeight: 700,
             color: "rgba(92, 138, 94, 0.22)",
             lineHeight: 1,
-            marginBottom: "12px",
+            marginBottom: "20px",
             letterSpacing: "-0.04em",
+            display: "inline-block",
           }}>
-            78%
+            <RoughNotation
+              type="circle"
+              color="rgba(92, 138, 94, 0.5)"
+              strokeWidth={5}
+              padding={24}
+              show={animationComplete}
+            >
+              78%
+            </RoughNotation>
           </div>
 
           <p style={{
@@ -91,7 +103,9 @@ export default function YouAreNotAlone() {
           <div style={{ width: "40px", height: "3px", background: "var(--sage)", margin: "20px auto 16px", borderRadius: "2px" }} />
 
           <p style={{ fontFamily: "'Caveat', cursive", fontSize: "1.45rem", color: "#4a5a4d", opacity: 0.95, margin: 0 }}>
-            You are not alone in this.
+            <RoughNotation type="underline" color="var(--sage)" strokeWidth={2} padding={2} show={animationComplete}>
+              You are not alone in this.
+            </RoughNotation>
           </p>
         </motion.div>
 

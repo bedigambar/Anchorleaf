@@ -1,7 +1,9 @@
-﻿"use client";
+"use client";
+import { useState } from "react";
 import { motion } from "framer-motion";
 import { ArrowRight } from "lucide-react";
 import Link from "next/link";
+import RoughNotation from "@/components/ui/RoughNotation";
 
 const stagger = { hidden: {}, visible: { transition: { staggerChildren: 0.15, delayChildren: 0.1 } } };
 const reveal  = { hidden: { opacity: 0, y: 24 }, visible: { opacity: 1, y: 0, transition: { duration: 0.6, ease: [0.25, 0.1, 0.25, 1] as const } } };
@@ -28,6 +30,7 @@ const steps = [
 ];
 
 export default function TheApproach() {
+  const [headingAnimationComplete, setHeadingAnimationComplete] = useState(false);
   return (
     <section style={{ background: "var(--navy)", position: "relative", overflow: "hidden" }} className="section">
       <svg style={{ position: "absolute", inset: 0, width: "100%", height: "100%", opacity: 0.025, pointerEvents: "none", zIndex: 0 }} xmlns="http://www.w3.org/2000/svg">
@@ -47,6 +50,7 @@ export default function TheApproach() {
           initial="hidden"
           whileInView="visible"
           viewport={{ once: true, amount: 0.15 }}
+          onAnimationComplete={() => setHeadingAnimationComplete(true)}
           style={{ textAlign: "center", marginBottom: "48px" }}
         >
           <motion.div variants={reveal}>
@@ -68,7 +72,7 @@ export default function TheApproach() {
           >
             Your emotions
             <br />
-            have patterns.
+            have <RoughNotation type="highlight" color="rgba(200, 184, 232, 0.32)" show={headingAnimationComplete} delay={150}>patterns.</RoughNotation>
             <br />
             We help you
             <br />

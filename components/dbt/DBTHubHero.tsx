@@ -3,6 +3,7 @@ import Link from "next/link";
 import { motion } from "framer-motion";
 import { Wind, Waves, Sun, Users } from "lucide-react";
 import ThreeMindsDiagram from "./ThreeMindsDiagram";
+import RoughNotation from "@/components/ui/RoughNotation";
 
 const stagger = { hidden: {}, visible: { transition: { staggerChildren: 0.12, delayChildren: 0.1 } } };
 const reveal = { hidden: { opacity: 0, y: 24 }, visible: { opacity: 1, y: 0, transition: { duration: 0.6, ease: [0.25, 0.1, 0.25, 1] as const } } };
@@ -58,7 +59,7 @@ export default function DBTHubHero() {
             <motion.h1 variants={reveal} className="h1" style={{ color: "var(--text-primary)", marginBottom: "24px" }}>
               Skills that
               <br />
-              actually work.
+              actually <RoughNotation type="underline" color="var(--sage)" strokeWidth={2.5} padding={2} viewportDelay={750}>work.</RoughNotation>
             </motion.h1>
             <motion.p variants={reveal} className="body-lg" style={{ color: "var(--text-secondary)", marginBottom: "40px", maxWidth: "440px" }}>
               DBT gives you concrete tools for the moments that feel impossible. Here&apos;s everything, explained.

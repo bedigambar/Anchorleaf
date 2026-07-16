@@ -1,6 +1,7 @@
-﻿"use client";
+"use client";
 import { AlertCircle, Wind, Flame, Users, Minus, Leaf, X } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
+import RoughNotation from "@/components/ui/RoughNotation";
 
 const filters = [
   { id: "crisis", label: "I'm in crisis", icon: <AlertCircle size={15} strokeWidth={1.5} />, color: "#c87a5a" },
@@ -76,7 +77,7 @@ export default function SkillFilterBar({ activeFilter, onFilterChange }: SkillFi
   return (
     <div className="skill-filter-bar">
       <div className="container">
-        <h2 className="filter-title">What are you feeling right now?</h2>
+        <h2 className="filter-title">What are you <RoughNotation type="highlight" color="rgba(232, 200, 122, 0.35)" viewportDelay={200}>feeling</RoughNotation> right now?</h2>
         <p className="filter-subtitle">
           Select an emotional state below. Anchorleaf will highlight the evidence-based DBT skills custom-suited for this exact moment.
         </p>

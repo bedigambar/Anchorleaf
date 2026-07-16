@@ -1,7 +1,9 @@
-﻿"use client";
+"use client";
+import { useState } from "react";
 import Link from "next/link";
 import { motion } from "framer-motion";
 import { Waves, BookHeart, Layers, BookOpen, ArrowRight } from "lucide-react";
+import RoughNotation from "@/components/ui/RoughNotation";
 
 const PATHS = [
   {
@@ -64,6 +66,39 @@ const reveal = {
 };
 
 export default function WhereToStart() {
+  const [gridAnimationComplete, setGridAnimationComplete] = useState(false);
+
+  const renderTitle = (title: string, accent: string, show: boolean) => {
+    const targets = ["overwhelmed.", "happening", "Teach", "Handbook"];
+    let matchedTarget = "";
+    for (const t of targets) {
+      if (title.includes(t)) {
+        matchedTarget = t;
+        break;
+      }
+    }
+
+    if (!matchedTarget) return title;
+
+    const parts = title.split(matchedTarget);
+    const highlightColor = `${accent}33`;
+
+    return (
+      <>
+        {parts[0]}
+        <RoughNotation
+          type="highlight"
+          color={highlightColor}
+          show={show}
+          delay={600}
+        >
+          {matchedTarget}
+        </RoughNotation>
+        {parts[1]}
+      </>
+    );
+  };
+
   return (
     <section
       style={{
@@ -143,6 +178,7 @@ export default function WhereToStart() {
           whileInView="visible"
           viewport={{ once: true, amount: 0.1 }}
           variants={stagger}
+          onAnimationComplete={() => setGridAnimationComplete(true)}
           style={{
             display: "grid",
             gridTemplateColumns: "1fr 1fr",
@@ -235,7 +271,7 @@ export default function WhereToStart() {
                       position: "relative",
                     }}
                   >
-                    {p.title}
+                    {renderTitle(p.title, p.accent, gridAnimationComplete)}
                   </h3>
 
                   <p

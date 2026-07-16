@@ -14,6 +14,7 @@ import {
   SlidersHorizontal,
 } from "lucide-react";
 import Link from "next/link";
+import RoughNotation from "@/components/ui/RoughNotation";
 
 interface Article {
   slug: string;
@@ -65,6 +66,36 @@ export default function LearnClient() {
   const [flippedCards, setFlippedCards] = useState<Record<number, boolean>>({});
   const [searchQuery, setSearchQuery] = useState("");
   const [articleCategory, setArticleCategory] = useState<ArticleCategory>("All");
+
+  const renderArticleTitle = (title: string, color: string) => {
+    const targets = ["actually feel", "Marsha Linehan", "emotional intensity", "how to work"];
+    let matchedTarget = "";
+    for (const t of targets) {
+      if (title.includes(t)) {
+        matchedTarget = t;
+        break;
+      }
+    }
+
+    if (!matchedTarget) return title;
+
+    const parts = title.split(matchedTarget);
+    const highlightColor = `${color}33`;
+
+    return (
+      <>
+        {parts[0]}
+        <RoughNotation
+          type="highlight"
+          color={highlightColor}
+          viewportDelay={800}
+        >
+          {matchedTarget}
+        </RoughNotation>
+        {parts[1]}
+      </>
+    );
+  };
 
   const toggleFlip = (index: number) => {
     setFlippedCards((prev) => ({ ...prev, [index]: !prev[index] }));
@@ -134,7 +165,9 @@ export default function LearnClient() {
 
             <span className="section-label">Educational Hub</span>
             <h1 className="h2" style={{ color: "var(--text-primary)", marginTop: "12px", marginBottom: "20px" }}>
-              Understanding yourself
+              <RoughNotation type="underline" color="rgba(92, 138, 94, 0.75)" strokeWidth={2.5} padding={2} viewportDelay={300}>
+                Understanding yourself
+              </RoughNotation>
               <br />
               is the first step.
             </h1>
@@ -351,7 +384,7 @@ export default function LearnClient() {
                             lineHeight: 1.4,
                           }}
                         >
-                          {a.title}
+                          {renderArticleTitle(a.title, a.color)}
                         </h3>
                         <p
                           style={{
@@ -634,7 +667,7 @@ export default function LearnClient() {
                     marginBottom: 0,
                   }}
                 >
-                  The Friendly DBT Glossary
+                  The Friendly <RoughNotation type="circle" color="rgba(92, 138, 94, 0.7)" strokeWidth={2.5} padding={8} viewportDelay={400}>DBT Glossary</RoughNotation>
                 </h2>
                 <p
                   className="body-md"
@@ -749,6 +782,88 @@ export default function LearnClient() {
                   <ArrowRight size={16} strokeWidth={1.5} />
                 </span>
               </Link>
+            </div>
+
+            <div style={{
+              marginTop: "64px",
+              padding: "32px 40px",
+              background: "linear-gradient(135deg, rgba(92,138,94,0.06) 0%, rgba(232,200,122,0.08) 100%)",
+              border: "1px solid rgba(92,138,94,0.18)",
+              borderRadius: "var(--radius-xl)",
+              textAlign: "center",
+              maxWidth: "620px",
+              marginLeft: "auto",
+              marginRight: "auto",
+            }}>
+              <span style={{
+                display: "inline-block",
+                fontFamily: "'DM Sans', sans-serif",
+                fontSize: "0.72rem",
+                fontWeight: 700,
+                letterSpacing: "0.12em",
+                textTransform: "uppercase",
+                color: "var(--sage-dark)",
+                background: "rgba(92,138,94,0.1)",
+                border: "1px solid rgba(92,138,94,0.2)",
+                borderRadius: "9999px",
+                padding: "4px 14px",
+                marginBottom: "16px",
+              }}>
+                ✦ Important Note
+              </span>
+              <p style={{
+                fontFamily: "'Playfair Display', serif",
+                fontSize: "1.25rem",
+                fontWeight: 400,
+                color: "var(--text-primary)",
+                lineHeight: 1.55,
+                marginBottom: "12px",
+              }}>
+                Want to write for Anchorleaf?
+              </p>
+              <p style={{
+                fontFamily: "'DM Sans', sans-serif",
+                fontSize: "0.95rem",
+                lineHeight: 1.7,
+                color: "var(--text-secondary)",
+                marginBottom: "20px",
+              }}>
+                If you have a story, skill breakdown, or compassionate perspective on BPD and DBT you&apos;d like to share, we&apos;d love to include it here. Every contributor gets full credit - your name, bio link, and anything else you&apos;d like attached to your work.
+              </p>
+              <a
+                href="https://x.com/digambarcodes"
+                target="_blank"
+                rel="noopener noreferrer"
+                style={{
+                  display: "inline-flex",
+                  alignItems: "center",
+                  gap: "8px",
+                  fontFamily: "'DM Sans', sans-serif",
+                  fontSize: "0.9rem",
+                  fontWeight: 600,
+                  color: "var(--sage-dark)",
+                  background: "white",
+                  border: "1.5px solid rgba(92,138,94,0.3)",
+                  borderRadius: "9999px",
+                  padding: "10px 24px",
+                  textDecoration: "none",
+                  transition: "all 0.25s ease",
+                  boxShadow: "var(--shadow-sm)",
+                }}
+                onMouseEnter={(e) => {
+                  (e.currentTarget as HTMLElement).style.background = "rgba(92,138,94,0.08)";
+                  (e.currentTarget as HTMLElement).style.borderColor = "var(--sage)";
+                }}
+                onMouseLeave={(e) => {
+                  (e.currentTarget as HTMLElement).style.background = "white";
+                  (e.currentTarget as HTMLElement).style.borderColor = "rgba(92,138,94,0.3)";
+                }}
+              >
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+                  <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-4.714-6.231-5.401 6.231H2.746l7.73-8.835L1.254 2.25H8.08l4.253 5.622zm-1.161 17.52h1.833L7.084 4.126H5.117z" />
+                </svg>
+                Reach out on X · @digambarcodes
+              </a>
             </div>
           </div>
         </section>

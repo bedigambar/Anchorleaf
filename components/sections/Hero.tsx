@@ -3,6 +3,7 @@ import { useEffect, useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import Link from "next/link";
 import { hasSeenHero, markHeroSeen } from "@/lib/storage";
+import RoughNotation from "@/components/ui/RoughNotation";
 import {
   ArrowRight,
   ChevronDown,
@@ -35,7 +36,10 @@ export default function Hero() {
   const [activeSkill, setActiveSkill] = useState<"STOP" | "DEAR" | "TIPP" | "RAIN" | null>(null);
   const [inputValue, setInputValue] = useState("");
   const [skipIntro, setSkipIntro] = useState(false);
+  const [isMounted, setIsMounted] = useState(false);
+  const [titleAnimationComplete, setTitleAnimationComplete] = useState(false);
   useEffect(() => {
+    setIsMounted(true);
     if (hasSeenHero()) setSkipIntro(true);
     markHeroSeen();
   }, []);
@@ -71,15 +75,17 @@ export default function Hero() {
       justifyContent: "center",
       padding: "140px 24px 100px 24px"
     }}>
-      <video
-        autoPlay
-        loop
-        muted
-        playsInline
-        style={{ position: "absolute", inset: 0, width: "100%", height: "100%", objectFit: "cover", zIndex: 0 }}
-      >
-        <source src="/background1.mp4" type="video/mp4" />
-      </video>
+      {isMounted && (
+        <video
+          autoPlay
+          loop
+          muted
+          playsInline
+          style={{ position: "absolute", inset: 0, width: "100%", height: "100%", objectFit: "cover", zIndex: 0 }}
+        >
+          <source src="/background1.mp4" type="video/mp4" />
+        </video>
+      )}
 
       <div style={{ position: "absolute", inset: 0, background: "linear-gradient(to bottom, rgba(15,15,25,0.65) 0%, rgba(15,15,25,0.35) 50%, #fdf8f3 100%)", zIndex: 1 }} />
 
@@ -131,13 +137,14 @@ export default function Hero() {
               gap: "8px",
             }}>
               <span style={{ fontFamily: "'DM Sans', sans-serif", fontSize: "0.75rem", fontWeight: 600, letterSpacing: "0.12em", textTransform: "uppercase", color: "rgba(254,250,245,0.9)" }}>
-                DBT · Emotional Wellness · You Are Not Alone
+                DBT · Emotional Wellness
               </span>
             </div>
           </motion.div>
 
           <motion.h1
             variants={heroItem(0.55)}
+            onAnimationComplete={() => setTitleAnimationComplete(true)}
             style={{
               fontFamily: "'Playfair Display', serif",
               fontSize: "clamp(3.2rem, 5.5vw, 5.2rem)",
@@ -151,7 +158,7 @@ export default function Hero() {
           >
             Your emotions
             <br />
-            have meaning.
+            have <RoughNotation type="circle" color="#e8c87a" strokeWidth={2.5} padding={8} show={titleAnimationComplete} delay={300}>meaning.</RoughNotation>
           </motion.h1>
 
           <motion.p

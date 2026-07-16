@@ -3,6 +3,7 @@ import { motion } from "framer-motion";
 import Link from "next/link";
 import { ArrowRight, BookOpen } from "lucide-react";
 import LottiePlantGrow from "@/components/ui/LottiePlantGrow";
+import RoughNotation from "@/components/ui/RoughNotation";
 
 export default function CTABanner() {
   return (
@@ -23,7 +24,7 @@ export default function CTABanner() {
           <h2 className="h2" style={{ color: "white", marginBottom: "20px" }}>
             Ready to feel
             <br />
-            understood?
+            <RoughNotation type="circle" color="#f5c8a8" strokeWidth={2.5} padding={8} viewportDelay={950}>understood?</RoughNotation>
           </h2>
           <p className="body-lg" style={{ color: "rgba(255,255,255,0.78)", marginBottom: "40px", maxWidth: "520px", margin: "0 auto 40px" }}>
             No account. No paywall. Just the skills, and a comprehensive handbook to study them

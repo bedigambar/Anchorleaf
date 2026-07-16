@@ -9,11 +9,13 @@
     "lint": "eslint"
   },
   "dependencies": {
+    "@turahe/react-rough-notation": "^2.0.2",
     "framer-motion": "^12.38.0",
     "lucide-react": "^0.542.0",
     "next": "16.2.6",
     "react": "19.2.0",
-    "react-dom": "19.2.0"
+    "react-dom": "19.2.0",
+    "rough-notation": "^0.5.1"
   },
   "devDependencies": {
     "@tailwindcss/postcss": "^4",

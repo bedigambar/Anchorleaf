@@ -1,6 +1,15 @@
 "use client";
 
-import PDFReader from "@/components/pdf/PDFReader";
+import dynamic from "next/dynamic";
+
+const PDFReader = dynamic(() => import("@/components/pdf/PDFReader"), {
+  ssr: false,
+  loading: () => (
+    <div style={{ display: "flex", justifyContent: "center", alignItems: "center", minHeight: "100vh" }}>
+      <p style={{ fontFamily: "'DM Sans', sans-serif", color: "var(--text-secondary)" }}>Loading PDF Reader...</p>
+    </div>
+  ),
+});
 
 export default function HandbookClient() {
   return (

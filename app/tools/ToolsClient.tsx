@@ -8,6 +8,7 @@ import QuickToolsSection from "@/components/dbt/QuickToolsSection";
 import DBTBottomCTA from "@/components/dbt/DBTBottomCTA";
 import SelfSootheCard from "@/components/dbt/SelfSootheCard";
 import Grounding5421 from "@/components/dbt/Grounding5421";
+import RoughNotation from "@/components/ui/RoughNotation";
 
 const reveal = {
   hidden: { opacity: 0, y: 20 },
@@ -84,7 +85,7 @@ const MOOD_RECS: Record<MoodLevel, { heading: string; hint: string; section: str
   },
 };
 
-// Detect broad region from timezone — no GPS, no server calls
+// Detect broad region from timezone
 function detectRegion(): "india" | "uk" | "australia" | "canada" | "global" {
   try {
     const tz = Intl.DateTimeFormat().resolvedOptions().timeZone ?? "";
@@ -117,14 +118,6 @@ const REGIONAL_RESOURCES: Record<string, Array<{ name: string; desc: string; hre
 
 const CHECKIN_SKIP_KEY = "anchorleaf.tools.checkin.skipped.v1";
 
-/**
- * Returns true if the mood check-in should be skipped.
- * Two conditions:
- *   1. User already skipped this session (sessionStorage key set)
- *   2. User arrived via ?crisis=true (i.e. from the journal crisis banner)
- * Skipping via the X button writes the sessionStorage key so the check-in
- * stays hidden for the rest of the tab session.
- */
 function useSkipCheckIn(): [boolean, () => void] {
   const [skip, setSkip] = useState(false);
 
@@ -562,7 +555,7 @@ export default function ToolsClient() {
         >
           <span className="section-label">Bring yourself back</span>
           <h2 className="h2" style={{ color: "var(--text-primary)", marginTop: "12px", marginBottom: "16px" }}>
-            Ground yourself
+            Ground <RoughNotation type="highlight" color="rgba(245, 200, 176, 0.32)" viewportDelay={750}>yourself</RoughNotation>
           </h2>
           <p className="body-md" style={{ color: "var(--text-secondary)" }}>
             When your head is spinning or you feel like you&apos;re floating outside your body,
@@ -605,7 +598,7 @@ export default function ToolsClient() {
           >
             <span className="section-label">Body-first techniques</span>
             <h2 className="h2" style={{ color: "var(--text-primary)", marginTop: "12px", marginBottom: "16px" }}>
-              Six anchors you can use anywhere.
+              Six anchors you can use <RoughNotation type="circle" color="var(--sage)" strokeWidth={2.5} padding={8} viewportDelay={750}>anywhere.</RoughNotation>
             </h2>
             <p className="body-md" style={{ color: "var(--text-secondary)" }}>
               Each one shifts your body chemistry, not just your thoughts. That&apos;s why they
@@ -698,7 +691,7 @@ export default function ToolsClient() {
         >
           <span className="section-label">Beyond this page</span>
           <h2 className="h2" style={{ color: "var(--text-primary)", marginTop: "12px", marginBottom: "20px" }}>
-            Other places to go.
+            <RoughNotation type="underline" color="#c87a5a" strokeWidth={2.5} padding={2} viewportDelay={750}>Other places</RoughNotation> to go.
           </h2>
           <div style={{ display: "flex", flexDirection: "column", gap: "12px" }}>
             {[

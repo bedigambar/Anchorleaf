@@ -1,6 +1,8 @@
 "use client";
+import { useState } from "react";
 import { motion } from "framer-motion";
 import StoryCard from "@/components/ui/StoryCard";
+import RoughNotation from "@/components/ui/RoughNotation";
 
 const stagger = { hidden: {}, visible: { transition: { staggerChildren: 0.12, delayChildren: 0.1 } } };
 const reveal  = { hidden: { opacity: 0, y: 24 }, visible: { opacity: 1, y: 0, transition: { duration: 0.6, ease: [0.25, 0.1, 0.25, 1] as const } } };
@@ -41,6 +43,7 @@ const stories: { quote: string; meta: string; tags: string[]; theme: "relationsh
 const marqueeStories = [...stories, ...stories];
 
 export default function Testimonials() {
+  const [headingAnimationComplete, setHeadingAnimationComplete] = useState(false);
   return (
     <section style={{ background: "var(--cream)", overflow: "hidden" }} className="section">
       <div className="container">
@@ -49,13 +52,14 @@ export default function Testimonials() {
           initial="hidden"
           whileInView="visible"
           viewport={{ once: true, amount: 0.2 }}
+          onAnimationComplete={() => setHeadingAnimationComplete(true)}
           style={{ marginBottom: "48px" }}
         >
           <motion.div variants={reveal}>
             <span className="section-label">What people often share</span>
           </motion.div>
           <motion.h2 variants={reveal} className="h2" style={{ color: "var(--text-primary)", marginBottom: 0 }}>
-            You&apos;re in good company.
+            You&apos;re in <RoughNotation type="highlight" color="rgba(232, 200, 122, 0.35)" show={headingAnimationComplete} delay={150}>good</RoughNotation> company.
           </motion.h2>
           <motion.p variants={reveal} className="body-md" style={{ color: "var(--text-secondary)", maxWidth: "540px", marginTop: "12px", lineHeight: 1.6 }}>
             Common themes from the DBT community — composite examples, not individual testimonials.

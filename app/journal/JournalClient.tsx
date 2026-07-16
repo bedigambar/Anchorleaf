@@ -2,6 +2,7 @@
 import { useEffect, useMemo, useState } from "react";
 import Link from "next/link";
 import { motion, AnimatePresence } from "framer-motion";
+import RoughNotation from "@/components/ui/RoughNotation";
 import {
   BookmarkCheck,
   CalendarCheck,
@@ -64,7 +65,6 @@ export default function JournalClient() {
   const [bookmarks, setBookmarks] = useState<string[]>([]);
   const [hydrated, setHydrated] = useState(false);
 
-  // Form state
   const [intensity, setIntensity] = useState<number>(0);
   const [selectedEmotions, setSelectedEmotions] = useState<string[]>([]);
   const [selectedSkills, setSelectedSkills] = useState<string[]>([]);
@@ -78,7 +78,6 @@ export default function JournalClient() {
     setHydrated(true);
   }, []);
 
-  // Pre-fill form from today's existing entry, if any
   useEffect(() => {
     if (!hydrated) return;
     const today = todayKey();
@@ -189,7 +188,9 @@ export default function JournalClient() {
               className="h1"
               style={{ color: "var(--text-primary)", marginTop: "14px", marginBottom: "20px" }}
             >
-              How was today,
+              <RoughNotation type="underline" color="var(--sage)" strokeWidth={2.5} padding={2} viewportDelay={750}>
+                How was today,
+              </RoughNotation>
               <br />
               <em style={{ fontStyle: "italic", color: "var(--sage-dark)" }}>really?</em>
             </motion.h1>

@@ -3,6 +3,7 @@ import { useState, useRef, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Wind, Waves, Sun, Users, Play, Pause, RotateCcw } from "lucide-react";
 import Link from "next/link";
+import RoughNotation from "@/components/ui/RoughNotation";
 
 const stagger = { hidden: {}, visible: { transition: { staggerChildren: 0.1, delayChildren: 0.05 } } };
 const reveal = { hidden: { opacity: 0, y: 20 }, visible: { opacity: 1, y: 0, transition: { duration: 0.55, ease: [0.25, 0.1, 0.25, 1] as const } } };
@@ -182,7 +183,8 @@ export default function QuickToolsSection() {
             <span className="section-label">Quick Tools</span>
           </motion.div>
           <motion.h2 variants={reveal} className="h2" style={{ color: "var(--text-primary)", marginBottom: "16px" }}>
-            Use a skill,<br />right now.
+            Use a skill,<br />
+            <RoughNotation type="underline" color="var(--sage)" strokeWidth={2.5} padding={2} viewportDelay={750}>right now.</RoughNotation>
           </motion.h2>
           <motion.p variants={reveal} className="body-lg" style={{ color: "var(--text-secondary)" }}>
             You don&apos;t need to read everything first. Pick what you need in this moment.

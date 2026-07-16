@@ -1,12 +1,15 @@
-﻿"use client";
+"use client";
+import { useState } from "react";
 import { motion } from "framer-motion";
 import { ArrowRight, Users, Heart, CheckCircle2 } from "lucide-react";
 import Link from "next/link";
+import RoughNotation from "@/components/ui/RoughNotation";
 
 const stagger = { hidden: {}, visible: { transition: { staggerChildren: 0.12, delayChildren: 0.1 } } };
 const reveal  = { hidden: { opacity: 0, y: 24 }, visible: { opacity: 1, y: 0, transition: { duration: 0.6, ease: [0.25, 0.1, 0.25, 1] as const } } };
 
 export default function WhatIsBPD() {
+  const [headingAnimationComplete, setHeadingAnimationComplete] = useState(false);
   const stats = [
     { 
       number: "1 in 100", 
@@ -51,10 +54,15 @@ export default function WhatIsBPD() {
               <span className="section-label">Understanding BPD</span>
             </motion.div>
 
-            <motion.h2 variants={reveal} className="h2" style={{ color: "var(--text-primary)", marginBottom: "24px" }}>
+            <motion.h2
+              variants={reveal}
+              onAnimationComplete={() => setHeadingAnimationComplete(true)}
+              className="h2"
+              style={{ color: "var(--text-primary)", marginBottom: "24px" }}
+            >
               An emotion that feels
               <br />
-              like a tidal wave.
+              like a <RoughNotation type="underline" color="#c87a5a" strokeWidth={3} padding={1} show={headingAnimationComplete}>tidal wave.</RoughNotation>
             </motion.h2>
 
             <motion.p variants={reveal} className="body-lg" style={{ color: "var(--text-secondary)", marginBottom: "20px", lineHeight: 1.6 }}>

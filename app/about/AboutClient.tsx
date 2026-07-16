@@ -9,12 +9,12 @@ import {
   BookHeart,
   HandHeart,
   ArrowRight,
-  Sparkles,
   Phone,
   AlertTriangle,
   Stethoscope,
   BookOpen,
 } from "lucide-react";
+import RoughNotation from "@/components/ui/RoughNotation";
 
 const reveal = {
   hidden: { opacity: 0, y: 20 },
@@ -31,7 +31,7 @@ const PRINCIPLES = [
     title: "Emotionally safe",
     body: "Every word, color, and animation is designed to feel like a calm sunlit studio, not a clinic. We never lead with fear, never use stock photography of distressed people, and never lecture you about what you should feel.",
     tint: "rgba(212, 232, 194, 0.35)",
-    accent: "var(--sage)",
+    accent: "#5c8a5e",
   },
   {
     icon: ShieldCheck,
@@ -75,6 +75,67 @@ const BOUNDARIES = [
 ];
 
 export default function AboutClient() {
+  const renderPrincipleTitle = (title: string, color: string) => {
+    const targets = ["safe", "grounded", "human", "gated"];
+    let matchedTarget = "";
+    for (const t of targets) {
+      if (title.toLowerCase().includes(t)) {
+        const idx = title.toLowerCase().indexOf(t);
+        matchedTarget = title.substring(idx, idx + t.length);
+        break;
+      }
+    }
+
+    if (!matchedTarget) return title;
+
+    const parts = title.split(matchedTarget);
+    const highlightColor = `${color}25`;
+
+    return (
+      <>
+        {parts[0]}
+        <RoughNotation
+          type="highlight"
+          color={highlightColor}
+          viewportDelay={800}
+        >
+          {matchedTarget}
+        </RoughNotation>
+        {parts[1]}
+      </>
+    );
+  };
+
+  const renderInvolveTitle = (title: string) => {
+    const targets = ["Share", "Tell us", "Donate"];
+    let matchedTarget = "";
+    for (const t of targets) {
+      if (title.includes(t)) {
+        matchedTarget = t;
+        break;
+      }
+    }
+
+    if (!matchedTarget) return title;
+
+    const parts = title.split(matchedTarget);
+    const highlightColor = "rgba(232, 200, 122, 0.3)";
+
+    return (
+      <>
+        {parts[0]}
+        <RoughNotation
+          type="highlight"
+          color={highlightColor}
+          viewportDelay={800}
+        >
+          {matchedTarget}
+        </RoughNotation>
+        {parts[1]}
+      </>
+    );
+  };
+
   return (
     <main style={{ background: "var(--cream)", paddingTop: "120px", overflowX: "hidden" }}>
         <section
@@ -171,7 +232,7 @@ export default function AboutClient() {
               className="h1"
               style={{ color: "var(--text-primary)", marginBottom: "24px" }}
             >
-              You can be rooted
+              You can be <RoughNotation type="highlight" color="rgba(232, 200, 122, 0.35)" viewportDelay={750}>rooted</RoughNotation>
               <br />
               <em style={{ fontStyle: "italic", color: "var(--sage-dark)" }}>and still grow.</em>
             </motion.h1>
@@ -248,10 +309,10 @@ export default function AboutClient() {
                 <span className="section-label">Our story</span>
                 <h2
                   className="h2"
-                  style={{ color: "var(--text-primary)", marginTop: "12px" }}
+                  style={{ color: "var(--text-primary)", marginTop: "12px", lineHeight: 1.4 }}
                 >
-                  Built for the version of you that&apos;s up too late, looking for
-                  one steady sentence.
+                  Built for the version of you <RoughNotation type="underline" color="var(--sage)" strokeWidth={2} padding={1} viewportDelay={750}>that&apos;s up too late,</RoughNotation> looking for
+                  one <RoughNotation type="circle" color="#e8c87a" strokeWidth={2.5} padding={8} viewportDelay={750}>steady sentence.</RoughNotation>
                 </h2>
               </motion.div>
 
@@ -298,7 +359,7 @@ export default function AboutClient() {
                 className="h2"
                 style={{ color: "var(--text-primary)", marginTop: "12px", marginBottom: "16px" }}
               >
-                Four principles, no exceptions.
+                Four <RoughNotation type="underline" color="var(--sage)" strokeWidth={2} padding={1} viewportDelay={750}>principles</RoughNotation>, no <RoughNotation type="underline" color="var(--sage)" strokeWidth={2} padding={1} viewportDelay={750}>exceptions</RoughNotation>.
               </h2>
               <p className="body-md" style={{ color: "var(--text-secondary)" }}>
                 Mental health tools fail when they cut corners on any of these. We&apos;d rather
@@ -374,7 +435,7 @@ export default function AboutClient() {
                         position: "relative",
                       }}
                     >
-                      {p.title}
+                      {renderPrincipleTitle(p.title, p.accent)}
                     </h3>
                     <p
                       style={{
@@ -595,8 +656,10 @@ export default function AboutClient() {
               >
                 Every skill here came from
                 <br />
-                <em style={{ fontStyle: "italic", color: "var(--sage-dark)" }}>
-                  Marsha Linehan.
+                <em style={{ fontStyle: "italic", color: "var(--sage-dark)", display: "inline-block" }}>
+                  <RoughNotation type="underline" color="var(--sage-dark)" strokeWidth={2} padding={1} viewportDelay={750}>
+                    Marsha Linehan.
+                  </RoughNotation>
                 </em>
               </motion.h2>
               <motion.p
@@ -697,7 +760,7 @@ export default function AboutClient() {
                   marginBottom: "16px",
                 }}
               >
-                Three ways you can make this better.
+                Three ways you can make this <RoughNotation type="circle" color="#e8c87a" strokeWidth={2.5} padding={8} viewportDelay={750}>better.</RoughNotation>
               </motion.h2>
             </motion.div>
 
@@ -764,7 +827,7 @@ export default function AboutClient() {
                       marginBottom: "10px",
                     }}
                   >
-                    {c.title}
+                    {renderInvolveTitle(c.title)}
                   </h3>
                   <p
                     style={{
@@ -779,6 +842,91 @@ export default function AboutClient() {
                 </motion.div>
               ))}
             </motion.div>
+          </div>
+        </section>
+
+        <section style={{ padding: "80px 0 100px" }}>
+          <div className="container-narrow">
+            <div style={{
+              padding: "32px 40px",
+              background: "linear-gradient(135deg, rgba(92,138,94,0.06) 0%, rgba(232,200,122,0.08) 100%)",
+              border: "1px solid rgba(92,138,94,0.18)",
+              borderRadius: "var(--radius-xl)",
+              textAlign: "center",
+            }}>
+              <span style={{
+                display: "inline-block",
+                fontFamily: "'DM Sans', sans-serif",
+                fontSize: "0.72rem",
+                fontWeight: 700,
+                letterSpacing: "0.12em",
+                textTransform: "uppercase",
+                color: "var(--sage-dark)",
+                background: "rgba(92,138,94,0.1)",
+                border: "1px solid rgba(92,138,94,0.2)",
+                borderRadius: "9999px",
+                padding: "4px 14px",
+                marginBottom: "16px",
+              }}>
+                ✦ Important Note
+              </span>
+              <p style={{
+                fontFamily: "'Playfair Display', serif",
+                fontSize: "1.25rem",
+                fontWeight: 400,
+                color: "var(--text-primary)",
+                lineHeight: 1.55,
+                marginBottom: "12px",
+              }}>
+                Want to write for Anchorleaf?
+              </p>
+              <p style={{
+                fontFamily: "'DM Sans', sans-serif",
+                fontSize: "0.95rem",
+                lineHeight: 1.7,
+                color: "var(--text-secondary)",
+                marginBottom: "20px",
+                maxWidth: "520px",
+                marginLeft: "auto",
+                marginRight: "auto",
+              }}>
+                If you have a story, skill breakdown, or compassionate perspective on BPD and DBT you&apos;d like to share, we&apos;d love to include it here. Every contributor gets full credit - your name, bio link, and anything else you&apos;d like attached to your work.
+              </p>
+              <a
+                href="https://x.com/digambarcodes"
+                target="_blank"
+                rel="noopener noreferrer"
+                style={{
+                  display: "inline-flex",
+                  alignItems: "center",
+                  gap: "8px",
+                  fontFamily: "'DM Sans', sans-serif",
+                  fontSize: "0.9rem",
+                  fontWeight: 600,
+                  color: "var(--sage-dark)",
+                  background: "white",
+                  border: "1.5px solid rgba(92,138,94,0.3)",
+                  borderRadius: "9999px",
+                  padding: "10px 24px",
+                  textDecoration: "none",
+                  transition: "all 0.25s ease",
+                  boxShadow: "var(--shadow-sm)",
+                }}
+                onMouseEnter={(e) => {
+                  (e.currentTarget as HTMLElement).style.background = "rgba(92,138,94,0.08)";
+                  (e.currentTarget as HTMLElement).style.borderColor = "var(--sage)";
+                }}
+                onMouseLeave={(e) => {
+                  (e.currentTarget as HTMLElement).style.background = "white";
+                  (e.currentTarget as HTMLElement).style.borderColor = "rgba(92,138,94,0.3)";
+                }}
+              >
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+                  <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-4.714-6.231-5.401 6.231H2.746l7.73-8.835L1.254 2.25H8.08l4.253 5.622zm-1.161 17.52h1.833L7.084 4.126H5.117z" />
+                </svg>
+                Reach out on X · @digambarcodes
+              </a>
+            </div>
           </div>
         </section>
 

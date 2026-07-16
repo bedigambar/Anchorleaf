@@ -8,20 +8,20 @@ Live Repository: [https://github.com/bedigambar/Anchorleaf](https://github.com/b
 
 ## ✨ Features
 
-- **🧘 The Four Pillars of DBT**: Structured modules outlining key DBT skills:
+- **The Four Pillars of DBT**: Structured modules outlining key DBT skills:
   - **Mindfulness**: Being present, practicing the Wise Mind, and observing without judgment.
   - **Distress Tolerance**: Crisis survival skills, TIPP techniques, and self-soothing.
   - **Emotion Regulation**: Understanding, naming, and mitigating extreme emotional spikes.
   - **Interpersonal Effectiveness**: Navigating relationships with DEAR MAN, GIVE, and FAST frameworks.
-- **⚡ Right-Now Crisis Toolkit**:
+- **Right-Now Crisis Toolkit**:
   - **Mammalian Dive Reflex Guide**: Instant instructions for physiological panic spikes (e.g., using cold water).
   - **Box Breathing Companion**: Smooth, visual, and rhythmic breathing guide to regulate the nervous system.
   - **Grounding 5-4-3-2-1**: Interactive sensory grounding tool to combat dissociation and anxiety.
   - **Self-Soothe Card**: A modular guide to recruit the 5 senses for emotional regulation.
   - **Smart Region-Aware Crisis Helpline**: Automatically detects the user's broad geographic region using local timezone inference to show relevant emergency helplines alongside global resources (988, IASP) without active GPS/location tracking.
-- **📖 Integrated Skills Handbook**: An inline, responsive PDF reader featuring the official DBT Skills Training Handouts and Worksheets for easy study and review.
-- **📓 Privacy-First Daily Journal**: A daily mood, behavior, and urge tracker stored entirely locally on your device (`localStorage`) with no server-side databases or trackers. Includes structured data backup via a one-click clean JSON export schema.
-- **🔍 Quick Navigation Command Palette**: Press `Ctrl + K` or `⌘ + K` to search and jump to any skill, resource, or page instantly.
+- **Integrated Skills Handbook**: An inline, responsive PDF reader featuring the official DBT Skills Training Handouts and Worksheets for easy study and review.
+- **Privacy-First Daily Journal**: A daily mood, behavior, and urge tracker stored entirely locally on your device (`localStorage`) with no server-side databases or trackers. Includes structured data backup via a one-click clean JSON export schema.
+- **Quick Navigation Command Palette**: Press `Ctrl + K` or `⌘ + K` to search and jump to any skill, resource, or page instantly.
 
 ---
 
@@ -116,3 +116,15 @@ To maximize SEO performance and initial load speeds while retaining rich Framer 
 Anchorleaf is released under the [MIT License](https://github.com/bedigambar/Anchorleaf/blob/main/LICENSE) — © 2026 bedigambar.
 
 You're welcome to use, modify and build on this code, but you must keep the copyright notice and license intact (i.e. give credit). If you ship something based on Anchorleaf, a shout-out and a link back to [this repo](https://github.com/bedigambar/Anchorleaf) is hugely appreciated. 🙏
+
+---
+
+## ✍️ Write for Anchorleaf
+
+> **Want to contribute an article or perspective?**
+
+If you have a story, skill breakdown, or compassionate perspective on BPD and DBT you'd like to share, we'd love to include it on the site. Every contributor gets **full credit** - your name, bio link, and anything else you'd like attached to your work.
+
+Reach out on X (Twitter): [@digambarcodes](https://x.com/digambarcodes)
+
+We'll work with you to get it published. No gatekeeping, just real voices.

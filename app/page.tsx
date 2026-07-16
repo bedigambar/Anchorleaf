@@ -1,12 +1,14 @@
+import dynamic from "next/dynamic";
 import Hero from "@/components/sections/Hero";
 import WhereToStart from "@/components/sections/WhereToStart";
-import SkillInFocus from "@/components/sections/SkillInFocus";
-import WhatIsBPD from "@/components/sections/WhatIsBPD";
-import YouAreNotAlone from "@/components/sections/YouAreNotAlone";
-import WhatIsDBT from "@/components/sections/WhatIsDBT";
-import TheApproach from "@/components/sections/TheApproach";
-import Testimonials from "@/components/sections/Testimonials";
-import CTABanner from "@/components/sections/CTABanner";
+
+const WhatIsBPD = dynamic(() => import("@/components/sections/WhatIsBPD"));
+const YouAreNotAlone = dynamic(() => import("@/components/sections/YouAreNotAlone"));
+const SkillInFocus = dynamic(() => import("@/components/sections/SkillInFocus"));
+const WhatIsDBT = dynamic(() => import("@/components/sections/WhatIsDBT"));
+const TheApproach = dynamic(() => import("@/components/sections/TheApproach"));
+const Testimonials = dynamic(() => import("@/components/sections/Testimonials"));
+const CTABanner = dynamic(() => import("@/components/sections/CTABanner"));
 
 export default function Home() {
   return (

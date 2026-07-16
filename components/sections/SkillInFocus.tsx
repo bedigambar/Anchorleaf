@@ -1,9 +1,10 @@
 "use client";
-import { useMemo } from "react";
+import { useMemo, useState } from "react";
 import Link from "next/link";
 import { motion } from "framer-motion";
 import { Calendar, ArrowRight, Waves, Sun } from "lucide-react";
 import { SKILLS, type Skill } from "@/lib/companion/skills";
+import RoughNotation from "@/components/ui/RoughNotation";
 
 function dayOfYear(d: Date): number {
   const start = new Date(d.getFullYear(), 0, 0);
@@ -17,6 +18,7 @@ const PILLAR_META = {
 } as const;
 
 export default function SkillInFocus() {
+  const [headingAnimationComplete, setHeadingAnimationComplete] = useState(false);
   const skill: Skill = useMemo(() => {
     const idx = dayOfYear(new Date()) % SKILLS.length;
     return SKILLS[idx];
@@ -58,6 +60,7 @@ export default function SkillInFocus() {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, amount: 0.3 }}
           transition={{ duration: 0.55, ease: [0.25, 0.1, 0.25, 1] }}
+          onAnimationComplete={() => setHeadingAnimationComplete(true)}
           style={{ textAlign: "center", marginBottom: "40px", maxWidth: "620px", margin: "0 auto 40px" }}
         >
           <span
@@ -76,7 +79,7 @@ export default function SkillInFocus() {
             className="h2"
             style={{ color: "var(--text-primary)", marginTop: "12px", marginBottom: "12px" }}
           >
-            A skill worth knowing today.
+            A skill worth <RoughNotation type="highlight" color={`${meta.accent}33`} show={headingAnimationComplete} delay={150}>knowing</RoughNotation> today.
           </h2>
           <p
             className="body-md"

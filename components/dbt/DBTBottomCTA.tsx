@@ -2,6 +2,7 @@
 import { motion } from "framer-motion";
 import Link from "next/link";
 import { ArrowRight, Download } from "lucide-react";
+import RoughNotation from "@/components/ui/RoughNotation";
 
 export default function DBTBottomCTA() {
   return (
@@ -19,7 +20,7 @@ export default function DBTBottomCTA() {
           <h2 className="h2" style={{ color: "var(--text-on-dark)", marginBottom: "16px" }}>
             Skills are only useful
             <br />
-            if you practice them.
+            if you <RoughNotation type="highlight" color="rgba(200, 184, 232, 0.32)" viewportDelay={800}>practice</RoughNotation> them.
           </h2>
           <p className="body-lg" style={{ color: "var(--text-on-dark-muted)", marginBottom: "40px" }}>
             Anchorleaf&apos;s DBT Handbook contains all worksheets

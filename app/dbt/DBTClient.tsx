@@ -11,6 +11,7 @@ import WaveAnimation from "@/components/dbt/WaveAnimation";
 import { motion } from "framer-motion";
 import { Wind, Waves, Sun, Users, ArrowRight, BookOpen } from "lucide-react";
 import { getReadSkills } from "@/lib/storage";
+import RoughNotation from "@/components/ui/RoughNotation";
 
 const reveal = { hidden: { opacity: 0, y: 24 }, visible: { opacity: 1, y: 0, transition: { duration: 0.6, ease: [0.25, 0.1, 0.25, 1] as const } } };
 const stagger = { hidden: {}, visible: { transition: { staggerChildren: 0.1, delayChildren: 0.05 } } };
@@ -20,7 +21,11 @@ function PillarHeader({ num, title, sub, icon, href }: { num: string; title: str
     <motion.div variants={stagger} initial="hidden" whileInView="visible" viewport={{ once: true, amount: 0.15 }} style={{ marginBottom: "48px" }}>
       <motion.div variants={reveal} style={{ display: "flex", alignItems: "center", gap: "12px", marginBottom: "12px" }}>
         <span style={{ color: "var(--pillar-accent)", opacity: 0.9 }}>{icon}</span>
-        <span className="pillar-eyebrow">{num}</span>
+        <span className="pillar-eyebrow">
+          <RoughNotation type="circle" color="var(--pillar-accent)" strokeWidth={1.5} padding={6} viewportDelay={750}>
+            {num}
+          </RoughNotation>
+        </span>
       </motion.div>
       <motion.h2 variants={reveal} className="pillar-h2" style={{ marginBottom: "16px" }}>{title}</motion.h2>
       <motion.p variants={reveal} className="body-lg" style={{ color: "var(--text-secondary)", maxWidth: "560px", marginBottom: "20px" }}>{sub}</motion.p>
@@ -91,9 +96,6 @@ function getCardClass(skillId: string, activeFilter: string | null) {
   return relevant.includes(skillId) ? "skill-card highlighted" : "skill-card dimmed";
 }
 
-// Total named skills across all pillars (mindfulness + distress + emotion + interpersonal)
-// Counts: wise-mind, what-skills, how-skills, dear-man, fast, give, think, raven, stop, tipp, accepts, improve, abc, please, vitals
-// + opposite-action, radical-acceptance, self-soothe, vitals = defined inline in DBTClient
 const TOTAL_SKILL_COUNT = 19;
 
 export default function DBTClient() {
@@ -102,7 +104,6 @@ export default function DBTClient() {
 
   useEffect(() => {
     setExploredCount(getReadSkills().length);
-    // Re-check when window regains focus (user may have opened another tab)
     const onFocus = () => setExploredCount(getReadSkills().length);
     window.addEventListener("focus", onFocus);
     return () => window.removeEventListener("focus", onFocus);

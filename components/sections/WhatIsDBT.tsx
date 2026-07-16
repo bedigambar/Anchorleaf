@@ -1,7 +1,9 @@
-﻿"use client";
+"use client";
+import { useState } from "react";
 import { motion } from "framer-motion";
 import { Wind, Waves, Sun, Users } from "lucide-react";
 import PillarCard from "@/components/ui/PillarCard";
+import RoughNotation from "@/components/ui/RoughNotation";
 
 const stagger = { hidden: {}, visible: { transition: { staggerChildren: 0.12, delayChildren: 0.1 } } };
 const reveal  = { hidden: { opacity: 0, y: 24 }, visible: { opacity: 1, y: 0, transition: { duration: 0.6, ease: [0.25, 0.1, 0.25, 1] as const } } };
@@ -42,6 +44,7 @@ const pillars = [
 ];
 
 export default function WhatIsDBT() {
+  const [headingAnimationComplete, setHeadingAnimationComplete] = useState(false);
   return (
     <section style={{ background: "var(--cream)", position: "relative", overflow: "hidden" }} className="section">
       <div style={{
@@ -55,13 +58,14 @@ export default function WhatIsDBT() {
           initial="hidden"
           whileInView="visible"
           viewport={{ once: true, amount: 0.15 }}
+          onAnimationComplete={() => setHeadingAnimationComplete(true)}
           style={{ textAlign: "center", marginBottom: "48px" }}
         >
           <motion.div variants={reveal}>
             <span className="section-label">The Toolkit</span>
           </motion.div>
           <motion.h2 variants={reveal} className="h2" style={{ color: "var(--text-primary)", marginBottom: "20px" }}>
-            DBT offers practical skills
+            DBT offers <RoughNotation type="underline" color="rgba(92, 138, 94, 0.75)" strokeWidth={2.5} padding={2} show={headingAnimationComplete} delay={150}>practical skills</RoughNotation>
             <br />
             for difficult moments.
           </motion.h2>
